@@ -1,18 +1,25 @@
 <template>
-  <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import AgCookie from '../agCookie'
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
+  data() {
+    return {
+      lang: null,
+      cookies: null
+    }
+  }, 
+  mounted(){
+    this.cookies = new AgCookie;
+    this.lang = this.cookies.read('language')
+    if(this.lang == 'en'){
+      this.$router.push('/lang/en');
+    } else if (this.lang == 'rs'){
+      this.$router.push('/lang/rs');
+    }
   }
 }
 </script>
+
